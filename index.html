@@ -598,7 +598,7 @@
     <div class="wp-icon">📄</div>
     <div class="wp-title">Read the Whitepaper</div>
     <p class="wp-sub">13 sections covering BharatChain architecture, tokenomics, FIU-IND compliance strategy, UPI bridge design, RWA tokenisation, and the full go-to-market roadmap.</p>
-    <a class="wp-btn" href="Samrudo_Whitepaper_v1.docx" download>
+    <a class="wp-btn" href="https://raw.githubusercontent.com/samrudo/samrudo/main/Samrudo_Whitepaper_v1.docx" download>
       ⬇️ Download Whitepaper (v1.0)
     </a>
   </div>
@@ -611,18 +611,18 @@
     <h2 class="section-title">Partner with Samrudo</h2>
     <p class="section-sub">Whether you're an investor, exchange, regulatory body, or potential team member — we want to hear from you.</p>
     <div class="contact-grid">
-      <form class="contact-form" action="https://formspree.io/f/xdeozlao" method="POST">
+      <div class="contact-form">
         <div class="form-group">
           <label class="form-label">Your name</label>
-          <input class="form-input" type="text" name="name" placeholder="Rahul Sharma" required>
+          <input class="form-input" type="text" id="fname" placeholder="Rahul Sharma">
         </div>
         <div class="form-group">
           <label class="form-label">Email address</label>
-          <input class="form-input" type="email" name="email" placeholder="rahul@example.com" required>
+          <input class="form-input" type="email" id="femail" placeholder="rahul@example.com">
         </div>
         <div class="form-group">
           <label class="form-label">I am a</label>
-          <select class="form-input" name="type">
+          <select class="form-input" id="ftype">
             <option>Investor</option>
             <option>Exchange partner</option>
             <option>Team member applicant</option>
@@ -632,16 +632,28 @@
         </div>
         <div class="form-group">
           <label class="form-label">Message</label>
-          <textarea class="form-textarea" name="message" placeholder="Tell us about your interest in Samrudo..." required></textarea>
+          <textarea class="form-textarea" id="fmessage" placeholder="Tell us about your interest in Samrudo..."></textarea>
         </div>
-        <button class="form-submit" type="submit">Send message</button>
-      </form>
+        <button class="form-submit" onclick="sendEmail()">Send message</button>
+      </div>
+      <script>
+      function sendEmail() {
+        const name = document.getElementById("fname").value;
+        const email = document.getElementById("femail").value;
+        const type = document.getElementById("ftype").value;
+        const message = document.getElementById("fmessage").value;
+        if (!name || !email || !message) { alert("Please fill in all fields."); return; }
+        const subject = encodeURIComponent("Samrudo Enquiry — " + type + " — " + name);
+        const body = encodeURIComponent("Name: " + name + "\nEmail: " + email + "\nType: " + type + "\n\nMessage:\n" + message);
+        window.location.href = "mailto:samrudo@outlook.com?subject=" + subject + "&body=" + body;
+      }
+      </script>
       <div class="contact-info">
         <div class="contact-item">
           <div class="contact-icon">📧</div>
           <div>
             <div class="contact-label">Email</div>
-            <div class="contact-val">contact@samrudo.io</div>
+            <div class="contact-val">samrudo@outlook.com</div>
           </div>
         </div>
         <div class="contact-item">
