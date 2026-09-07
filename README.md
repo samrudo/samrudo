@@ -27,7 +27,7 @@ Built on **BharatChain**, India's own Layer-1 blockchain, Samrudo fills every ga
 
 | Gap | Samrudo's Solution |
 |---|---|
-| 🌍 No cross-border payments | Send to UAE, UK, USA in 30 seconds at 0.1% |
+| 🌍 No cross-border payments | Send to UAE, UK, USA in 30 seconds at 1% |
 | 🏦 No DeFi for Indians | FIU-IND compliant lending, staking & yield |
 | 🗺️ No regional languages | 22 scheduled Indian languages supported |
 | 🏠 No RWA access | Gold, real estate & agri tokenised on-chain |
@@ -70,7 +70,7 @@ India's 15 million freelancers can receive USD globally, auto-convert to INRX, a
 | Block time | 1.5 seconds |
 | Throughput | 10,000+ TPS |
 | EVM compatible | Yes — Solidity contracts deploy unchanged |
-| Transaction fee | Under ₹0.01 |
+| Transaction fee | Percentage 1% |
 | Native stablecoin | INRX — fully INR-backed |
 | Cross-chain | IBC (Cosmos) + Ethereum + BNB Chain bridges |
 
@@ -151,8 +151,8 @@ Samrudo is compliant from day one — not an afterthought:
 samrudo/
 ├── index.html                    ← Website (live at samrudo.pages.dev)
 ├── README.md                     ← This file
-├── Samrudo_Whitepaper_v1.docx    ← Full technical whitepaper
-└── Samrudo_PitchDeck_V3_2026.pptx  ← Investor pitch deck
+├── Samrudo_Whitepaper_v2.docx    ← Full technical whitepaper
+└── Samrudo_PitchDeck_V5_2026.pptx  ← Investor pitch deck
 ```
 
 ---
