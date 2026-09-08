@@ -31,7 +31,7 @@ Built on **BharatChain**, India's own Layer-1 blockchain, Samrudo fills every ga
 | 🏦 No DeFi for Indians | FIU-IND compliant lending, staking & yield |
 | 🗺️ No regional languages | 22 scheduled Indian languages supported |
 | 🏠 No RWA access | Gold, real estate & agri tokenised on-chain |
-| 💸 High remittance fees | 0.1% vs 4–8% via SWIFT or hawala |
+| 💸 High remittance fees | 1% vs 4–8% via SWIFT |
 | 💼 No freelancer layer | Earn USD globally, spend via UPI locally |
 
 ---
@@ -52,8 +52,8 @@ Lending, staking and yield products that satisfy India's Financial Intelligence 
 - **Fractional Real Estate** — own ₹100 worth of Mumbai commercial property
 - **Agri tokens** — NCDEX-backed wheat, rice and cotton commodity tokens
 
-### ✈️ Cross-Border Remittances at 0.1%
-India receives **$135 billion** in remittances annually. SWIFT charges 4–8% and takes days. Samrudo charges 0.1% and settles in 30 seconds — saving Indian families ₹50,000–₹2,00,000 per year.
+### ✈️ Cross-Border Remittances at 1%
+India receives **$135 billion** in remittances annually. SWIFT charges 4–8% and takes days. Samrudo charges 1% and settles in 30 seconds — saving Indian families ₹50,000–₹2,00,000 per year.
 
 ### 💼 Freelancer Earn + Spend Layer
 India's 15 million freelancers can receive USD globally, auto-convert to INRX, and spend via UPI — with ITR-compatible income reports generated automatically.
