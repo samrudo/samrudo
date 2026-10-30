@@ -299,6 +299,23 @@
     .contact-grid { grid-template-columns: 1fr; }
     .hero-stats { gap: 1.5rem; }
   }
+
+  /* ── TESTNET / ADD TOKEN ── */
+  .testnet-section { background: var(--green-deep); padding: 5rem 2rem; }
+  .testnet-box { max-width: 720px; margin: 0 auto; text-align: center; }
+  .testnet-box .section-title { color: #fff; }
+  .testnet-box p { color: rgba(255,255,255,0.65); font-size: 14px; line-height: 1.7; margin-bottom: 1.5rem; }
+  .testnet-badge { display:inline-block; background: rgba(245,200,66,0.15); border: 0.5px solid rgba(245,200,66,0.4); color: var(--gold-light); font-size: 11px; font-weight: 600; padding: 4px 12px; border-radius: 20px; margin-bottom: 1rem; }
+  .token-addr { background: rgba(255,255,255,0.06); border: 0.5px solid rgba(255,255,255,0.15); border-radius: 10px; padding: 12px 14px; margin-bottom: 1.25rem; word-break: break-all; }
+  .token-addr-label { font-size: 11px; color: rgba(255,255,255,0.5); margin-bottom: 4px; }
+  .token-addr-val { font-family: monospace; font-size: 12px; color: #fff; }
+  .token-btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+  .mm-btn { background: var(--gold); color: var(--green-deep); border: none; padding: 14px 26px; border-radius: 8px; font-size: 14px; font-weight: 700; font-family: 'Outfit', sans-serif; cursor: pointer; transition: background 0.2s; }
+  .mm-btn:hover { background: var(--gold-light); }
+  .scan-link { display:inline-block; color: #fff; border: 1px solid rgba(255,255,255,0.3); padding: 14px 26px; border-radius: 8px; font-size: 14px; font-weight: 500; text-decoration: none; }
+  .scan-link:hover { border-color: var(--gold-light); }
+  .mm-status { margin-top: 1rem; font-size: 13px; min-height: 20px; color: var(--gold-light); }
+  .testnet-note { margin-top: 1.25rem; font-size: 11px; color: rgba(255,255,255,0.4); line-height: 1.6; }
 </style>
 </head>
 <body>
@@ -337,7 +354,7 @@
       <div class="pill">RWA tokenisation</div>
       <div class="pill">22 Indian languages</div>
       <div class="pill">Native UPI bridge</div>
-      <div class="pill">Micro-fees under ₹0.01</div>
+      <div class="pill">Network fees under ₹0.01</div>
     </div>
     <div class="hero-btns">
       <a class="btn-primary" href="#whitepaper">Download Whitepaper</a>
@@ -483,8 +500,12 @@
           <span class="token-info-val">1.5 seconds</span>
         </div>
         <div class="token-info-row">
-          <span class="token-info-label">Transaction fee</span>
+          <span class="token-info-label">Network fee (per transaction)</span>
           <span class="token-info-val">Under ₹0.01</span>
+        </div>
+        <div class="token-info-row">
+          <span class="token-info-label">Total remittance cost (target)</span>
+          <span class="token-info-val">Around 1% or less</span>
         </div>
         <div class="burn-box">
           🔥 Burn mechanism: 20% of all UPI bridge fees permanently burned — creating deflationary pressure aligned with network growth
@@ -592,13 +613,32 @@
   </div>
 </section>
 
+<!-- TESTNET TOKEN -->
+<section class="testnet-section" id="testnet">
+  <div class="testnet-box">
+    <div class="testnet-badge">LIVE ON POLYGON AMOY TESTNET</div>
+    <h2 class="section-title">Try the $SMRD prototype token</h2>
+    <p>The $SMRD token contract is deployed on the Polygon Amoy test network. It has no monetary value and is for demonstration only. Add it to MetaMask to see it in your own wallet.</p>
+    <div class="token-addr">
+      <div class="token-addr-label">Contract address (Amoy testnet)</div>
+      <div class="token-addr-val" id="smrdAddrText"></div>
+    </div>
+    <div class="token-btns">
+      <button class="mm-btn" onclick="addSmrdToMetaMask()">Add $SMRD to MetaMask</button>
+      <a class="scan-link" id="smrdScanLink" href="#" target="_blank" rel="noopener">View on Polygonscan</a>
+    </div>
+    <div class="mm-status" id="mmStatus"></div>
+    <div class="testnet-note">Requires the MetaMask extension or the MetaMask mobile in-app browser. The button will switch you to the Amoy test network first. Test tokens only. Do not send real funds.</div>
+  </div>
+</section>
+
 <!-- WHITEPAPER CTA -->
 <div class="wp-section" id="whitepaper">
   <div class="wp-inner">
     <div class="wp-icon">📄</div>
     <div class="wp-title">Read the Whitepaper</div>
     <p class="wp-sub">13 sections covering BharatChain architecture, tokenomics, FIU-IND compliance strategy, UPI bridge design, RWA tokenisation, and the full go-to-market roadmap.</p>
-    <a class="wp-btn" href="Samrudo_Whitepaper_v2.pdf" download>
+    <a class="wp-btn" href="https://samrudo.github.io/samrudo/Samrudo_Whitepaper_v2.pdf" target="_blank" rel="noopener">
       ⬇️ Download Whitepaper (PDF)
     </a>
   </div>
@@ -685,5 +725,46 @@
   <div class="footer-copy">© 2026 Samrudo Foundation. All rights reserved. $SMRD is a utility token. This website does not constitute financial advice.<br>Samrudo™ trademark pending registration — IP India & USPTO.</div>
 </footer>
 
+<script>
+// ---- $SMRD testnet token settings ----
+var SMRD_ADDRESS = "0x587Be7e9E3d07471A20bA54326592085250249c3";
+var SMRD_LOGO = "https://samrudo.github.io/samrudo/smrd-logo.png";
+var AMOY = {
+  chainId: "0x13882",
+  chainName: "Polygon Amoy Testnet",
+  nativeCurrency: { name: "POL", symbol: "POL", decimals: 18 },
+  rpcUrls: ["https://rpc-amoy.polygon.technology"],
+  blockExplorerUrls: ["https://amoy.polygonscan.com"]
+};
+var validAddr = /^0x[a-fA-F0-9]{40}$/.test(SMRD_ADDRESS);
+document.getElementById("smrdAddrText").textContent = validAddr ? SMRD_ADDRESS : "Contract address coming soon";
+if (validAddr) { document.getElementById("smrdScanLink").href = "https://amoy.polygonscan.com/token/" + SMRD_ADDRESS; }
+else { document.getElementById("smrdScanLink").style.display = "none"; }
+
+async function addSmrdToMetaMask() {
+  var status = document.getElementById("mmStatus");
+  if (!validAddr) { status.textContent = "Contract address has not been set on this page yet."; return; }
+  if (!window.ethereum) { status.textContent = "MetaMask not found. Install the MetaMask extension, or open this page in the MetaMask mobile browser."; return; }
+  try {
+    status.textContent = "Connecting to MetaMask...";
+    await window.ethereum.request({ method: "eth_requestAccounts" });
+    try {
+      await window.ethereum.request({ method: "wallet_switchEthereumChain", params: [{ chainId: AMOY.chainId }] });
+    } catch (e) {
+      if (e && e.code === 4902) {
+        await window.ethereum.request({ method: "wallet_addEthereumChain", params: [AMOY] });
+      } else { throw e; }
+    }
+    status.textContent = "Adding token...";
+    var added = await window.ethereum.request({
+      method: "wallet_watchAsset",
+      params: { type: "ERC20", options: { address: SMRD_ADDRESS, symbol: "SMRD", decimals: 18, image: SMRD_LOGO } }
+    });
+    status.textContent = added ? "Done. $SMRD has been added to your wallet." : "Token was not added.";
+  } catch (err) {
+    status.textContent = "Could not complete: " + ((err && err.message) ? err.message : "request was cancelled.");
+  }
+}
+</script>
 </body>
 </html>
