@@ -755,7 +755,44 @@ async function addSmrdToMetaMask() {
         await window.ethereum.request({ method: "wallet_addEthereumChain", params: [AMOY] });
       } else { throw e; }
     }
-    status.textContent = "Adding token...";
+function calculateSavings() {
+
+  const amount =
+    parseFloat(document.getElementById("sendAmount").value) || 0;
+
+  const bankFee = amount * 0.05;      // 5%
+  const samrudoFee = amount * 0.01;   // 1%
+
+  const savings = bankFee - samrudoFee;
+
+  document.getElementById("calcResults").innerHTML = `
+    <div style="
+      background:#F8F6F0;
+      padding:20px;
+      border-radius:10px;
+      border:1px solid #ddd;
+    ">
+      <p><strong>Traditional Bank Transfer</strong></p>
+      <p>Fee: ₹${bankFee.toLocaleString()}</p>
+      <p>Estimated Delivery: 2–5 days</p>
+
+      <hr style="margin:15px 0;">
+
+      <p><strong>Samrudo</strong></p>
+      <p>Fee: ₹${samrudoFee.toLocaleString()}</p>
+      <p>Estimated Delivery: Under 1 minute</p>
+
+      <hr style="margin:15px 0;">
+
+      <p>
+        <strong>
+        Potential Savings: ₹${savings.toLocaleString()}
+        </strong>
+      </p>
+    </div>
+  `;
+}
+   status.textContent = "Adding token...";
     var added = await window.ethereum.request({
       method: "wallet_watchAsset",
       params: { type: "ERC20", options: { address: SMRD_ADDRESS, symbol: "SMRD", decimals: 18, image: SMRD_LOGO } }
