@@ -1,4 +1,4 @@
-# ⬡ Samrudo — India's Global Payment Layer
+# Samrudo — India's Global Payment Layer
 
 <div align="center">
 
@@ -11,7 +11,7 @@
 
 Cross-border remittances · Compliant DeFi · RWA Tokenisation · 22 Indian Languages
 
-🌐 [samrudo.com](https://www.samrudo.com) · 📄 [Whitepaper](./Samrudo_Whitepaper_v2.pdf) · 🐦 [X / Twitter](https://x.com/samrudo_io)
+🌐 [samrudo.com](https://www.samrudo.com) · 📄 [Whitepaper](./Samrudo_Whitepaper_v2.pdf) · [X / Twitter](https://x.com/samrudo_io)
 
 </div>
 
