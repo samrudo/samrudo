@@ -2,130 +2,143 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Samrudo Portal (test network)</title>
 <link rel="icon" type="image/png" href="smrd-logo.png">
 <style>
-:root{--bg:#10281a;--card:#16351f;--line:rgba(255,255,255,.14);--text:#f1f5ee;--muted:#a3b8a7;--gold:#F5C842;--green:#4A9B4E;--red:#ff9a90;color-scheme:dark}
+:root{color-scheme:dark;--bg:#10260f;--card:#183a1a;--card2:#215024;--green:#4A9B4E;--gold:#F5C842;--text:#EAF3DE;--muted:#9fbba1;--bad:#ff9d93;--ok:#8be68f;}
 *{box-sizing:border-box}
-[hidden]{display:none!important}
-body{margin:0;background:var(--bg);color:var(--text);font:16px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
-.wrap{max-width:520px;margin:0 auto;padding:16px 16px 40px}
-header{display:flex;align-items:center;gap:10px;margin:4px 0 12px}
-header svg{width:36px;height:36px;flex:none}
-header .t{font-weight:700;font-size:18px;line-height:1.1}
-header .s{font-size:12px;color:var(--gold)}
-.chip{margin-left:auto;font-size:12px;padding:4px 10px;border-radius:20px;border:1px solid var(--line);color:var(--muted);white-space:nowrap}
-.chip.ok{color:#9be29f;border-color:#3d7a42}.chip.bad{color:var(--red);border-color:#8a4a45}
-.banner{background:rgba(245,200,66,.12);border:1px solid rgba(245,200,66,.4);color:var(--gold);border-radius:10px;padding:10px 12px;font-size:13px;margin-bottom:14px}
-.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px;margin-bottom:14px}
-.card h2{margin:0 0 10px;font-size:16px}
-.card.warn{border-color:#8a6a2d}
-button,.btn{font:inherit;font-weight:600;border:0;border-radius:10px;padding:12px 16px;cursor:pointer;background:var(--gold);color:#1a3c1b;text-decoration:none;display:inline-block;text-align:center}
-button.sec,.btn.sec{background:transparent;color:var(--text);border:1px solid var(--line)}
-button:disabled{opacity:.5;cursor:not-allowed}
-.row{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px}
-.row>*{flex:1 1 140px}
+body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;line-height:1.5;padding:env(safe-area-inset-top) 0 env(safe-area-inset-bottom)}
+header{display:flex;align-items:center;gap:10px;padding:14px 16px;border-bottom:1px solid rgba(255,255,255,.08)}
+header .brand{font-weight:700;font-size:18px}
+header .chip{margin-left:auto}
+header a{color:var(--muted);font-size:13px;text-decoration:none}
+.banner{background:rgba(245,200,66,.14);border-bottom:1px solid rgba(245,200,66,.35);color:var(--gold);font-size:13px;padding:10px 16px;text-align:center}
+main{max-width:520px;margin:0 auto;padding:16px}
+.card{background:var(--card);border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:16px;margin-bottom:14px}
+.card h2{margin:0 0 10px;font-size:15px;color:var(--gold);letter-spacing:.02em}
+.chip{display:inline-block;font-size:12px;padding:3px 10px;border-radius:20px;background:var(--card2);color:var(--text);border:1px solid rgba(255,255,255,.12)}
+.chip.ok{color:var(--ok)} .chip.bad{color:var(--bad)}
+button,.btn{font:inherit;font-weight:600;border:0;border-radius:10px;padding:13px 16px;cursor:pointer;background:var(--gold);color:#17300f;width:100%;text-align:center;display:block;text-decoration:none}
+button.secondary,.btn.secondary{background:transparent;color:var(--text);border:1px solid rgba(255,255,255,.25)}
+button:disabled{opacity:.55;cursor:not-allowed}
+.row{display:flex;gap:10px}.row>*{flex:1}
 label{display:block;font-size:13px;color:var(--muted);margin:10px 0 4px}
-input{width:100%;font:inherit;color:var(--text);background:#0d2115;border:1px solid var(--line);border-radius:10px;padding:12px}
-input:focus{outline:2px solid var(--green)}
-.amtrow{display:flex;gap:8px}.amtrow input{flex:1}.amtrow button{flex:none;padding:12px 14px}
-.bal{display:flex;gap:12px;margin:10px 0}
-.bal>div{flex:1;background:#0d2115;border:1px solid var(--line);border-radius:10px;padding:10px 12px}
-.bal .n{font-size:20px;font-weight:700;word-break:break-all}.bal .l{font-size:12px;color:var(--muted)}
-.mono{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:12px;word-break:break-all}
-.note{font-size:13px;color:var(--muted);margin-top:8px;min-height:1px}
-.note.err{color:var(--red)}.note.good{color:#9be29f}
-.sum{background:#0d2115;border:1px solid var(--line);border-radius:10px;padding:12px;margin-top:12px;font-size:14px}
-#qrBox{background:#fff;border-radius:12px;padding:8px;width:min(240px,100%);margin:6px auto 10px}
-#qrBox svg{display:block;width:100%;height:auto}
-ul.act{list-style:none;margin:0;padding:0}ul.act li{padding:8px 0;border-top:1px solid var(--line);font-size:13px}ul.act li:first-child{border-top:0}
+input{font:inherit;width:100%;padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,.2);background:#0c1d0b;color:var(--text)}
+input:focus{outline:2px solid var(--gold);outline-offset:1px}
+.msg{font-size:13px;margin-top:10px;min-height:18px}.msg.bad{color:var(--bad)}.msg.ok{color:var(--ok)}.msg.info{color:var(--muted)}
+.bal{display:flex;justify-content:space-between;align-items:baseline;padding:8px 0;border-bottom:1px solid rgba(255,255,255,.07)}
+.bal:last-child{border-bottom:0}.bal b{font-size:22px}.bal span{color:var(--muted);font-size:13px}
+.addr{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:12px;word-break:break-all;color:var(--muted)}
+#qrBox{background:#fff;border-radius:12px;padding:6px;width:210px;height:210px;margin:6px auto 12px}
+#qrBox svg{width:100%;height:100%;display:block}
+.review{background:var(--card2);border-radius:10px;padding:12px;margin-top:12px;font-size:14px}
+.review div{margin:4px 0}
+ul.act{list-style:none;margin:0;padding:0;font-size:13px}
+ul.act li{padding:8px 0;border-bottom:1px solid rgba(255,255,255,.07)}
 a{color:var(--gold)}
-details{font-size:13px;color:var(--muted)}summary{cursor:pointer;color:var(--text);margin-bottom:6px}
-.foot{font-size:12px;color:var(--muted);margin-top:18px}
+details{font-size:13px;color:var(--muted)}summary{cursor:pointer;color:var(--text)}
+.fine{font-size:12px;color:var(--muted)}
+[hidden]{display:none!important}
 </style>
 </head>
 <body>
-<div class="wrap">
 <header>
-<svg viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><circle cx="18" cy="18" r="17.2" fill="#2C5F2E" stroke="#4A9B4E" stroke-width="1.2"/><rect x="8.55" y="16.2" width="4.9" height="8.1" rx="0.8" fill="#F5C842"/><rect x="15.55" y="9.2" width="4.9" height="15.1" rx="0.8" fill="#F5C842"/><rect x="22.55" y="12.7" width="4.9" height="11.6" rx="0.8" fill="#F5C842"/><rect x="7.4" y="25.4" width="21.2" height="0.8" rx="0.4" fill="#F5C842" opacity="0.65"/></svg>
-<div><div class="t">Samrudo Portal</div><div class="s">$SMRD prototype</div></div>
-<span class="chip" id="netChip">Not connected</span>
+  <svg width="30" height="30" viewBox="0 0 36 36" aria-hidden="true"><circle cx="18" cy="18" r="17.2" fill="#2C5F2E" stroke="#4A9B4E" stroke-width="1.2"/><rect x="8.55" y="16.2" width="4.9" height="8.1" rx="0.8" fill="#F5C842"/><rect x="15.55" y="9.2" width="4.9" height="15.1" rx="0.8" fill="#F5C842"/><rect x="22.55" y="12.7" width="4.9" height="11.6" rx="0.8" fill="#F5C842"/><rect x="7.4" y="25.4" width="21.2" height="0.8" rx="0.4" fill="#F5C842" opacity="0.65"/></svg>
+  <span class="brand">Samrudo Portal</span>
+  <span class="chip" id="netChip">Not connected</span>
 </header>
-<div class="banner"><b>TEST NETWORK.</b> $SMRD here has no monetary value. Never send real funds. Samrudo will never ask for your seed phrase.</div>
+<div class="banner"><b>TEST NETWORK.</b> $SMRD here has no monetary value. Never send real funds. Never share your seed phrase.</div>
+<main>
 
-<section class="card" id="connectCard">
-<h2>Connect your wallet</h2>
-<div class="note" style="margin-top:0">This portal uses your own wallet (MetaMask). Samrudo never holds your keys.</div>
-<div class="row"><button id="connectBtn">Connect wallet</button></div>
-<div class="note" id="connMsg"></div>
-<div id="noWallet" hidden class="note err">
-No wallet found in this browser.<br>
-<b>On a phone:</b> open this page inside the MetaMask app: <a id="mmLink" href="https://metamask.io/download/">Open in MetaMask</a>.<br>
-<b>On a laptop:</b> install the <a href="https://metamask.io/download/" target="_blank" rel="noopener">MetaMask extension</a>, then reload.
-</div>
-</section>
+  <section class="card" id="connectCard">
+    <h2>Connect your wallet</h2>
+    <p class="fine" style="margin-top:0">This prototype portal uses your own wallet (such as MetaMask). Samrudo never sees or stores your keys.</p>
+    <button id="connectBtn" type="button">Connect wallet</button>
+    <div class="msg info" id="connectMsg" role="status" aria-live="polite"></div>
+    <div id="noWallet" hidden>
+      <p class="fine">No wallet was found in this browser.</p>
+      <a class="btn" id="mmLink" href="https://metamask.io/download/" rel="noopener">Open this page in the MetaMask app</a>
+      <p class="fine" style="margin-bottom:0">On a laptop, install the <a href="https://metamask.io/download/" rel="noopener">MetaMask extension</a> and reload this page.</p>
+    </div>
+  </section>
 
-<div id="wrongNet" hidden class="card warn">
-<h2>Wrong network</h2>
-<div class="note" style="margin-top:0">Switch your wallet to Polygon Amoy (test network) to continue.</div>
-<div class="row"><button id="switchBtn">Switch to Polygon Amoy</button></div>
-</div>
+  <section class="card" id="walletCard" hidden>
+    <h2>Your wallet</h2>
+    <div class="addr" id="acctText"></div>
+    <div class="bal"><span>SMRD</span><b id="balSmrd">–</b></div>
+    <div class="bal"><span>POL (for gas)</span><b id="balPol">–</b></div>
+    <div class="msg info" id="gasHint" hidden>You have no test POL, so you cannot send yet. <a href="https://faucet.polygon.technology/" target="_blank" rel="noopener">Get free test POL</a></div>
+    <div class="row" style="margin-top:10px">
+      <button class="secondary" id="refreshBtn" type="button">Refresh</button>
+      <button class="secondary" id="addTokenBtn" type="button">Add $SMRD to wallet</button>
+    </div>
+    <div class="msg info" id="walletMsg" role="status" aria-live="polite"></div>
+  </section>
 
-<div id="mainPanels" hidden>
-<section class="card">
-<h2>Your wallet</h2>
-<div class="mono" id="acct"></div>
-<div class="bal">
-<div><div class="n" id="balSmrd">0</div><div class="l">SMRD</div></div>
-<div><div class="n" id="balPol">0</div><div class="l">POL (for fees)</div></div>
-</div>
-<div class="note err" id="polWarn" hidden>You have no POL for network fees. Get free test POL from the <a href="https://faucet.polygon.technology/" target="_blank" rel="noopener">Polygon faucet</a>.</div>
-<div class="row"><button class="sec" id="addTokenBtn">Add $SMRD to wallet</button><button class="sec" id="copyBtn">Copy address</button></div>
-<div class="note" id="tokenMsg"></div>
-</section>
+  <section class="card" id="wrongNet" hidden>
+    <h2>Wrong network</h2>
+    <p class="fine" style="margin-top:0">Switch your wallet to Polygon Amoy (test network) to continue.</p>
+    <button id="switchBtn" type="button">Switch to Polygon Amoy</button>
+  </section>
 
-<section class="card">
-<h2>Send $SMRD</h2>
-<label for="toAddr">To (wallet address)</label>
-<input id="toAddr" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="0x…">
-<label for="amount">Amount</label>
-<div class="amtrow"><input id="amount" inputmode="decimal" autocomplete="off" placeholder="0.0"><button class="sec" id="maxBtn" type="button">Max</button></div>
-<div class="note err" id="sendErr"></div>
-<div class="row"><button id="reviewBtn">Review</button></div>
-<div class="sum" id="summary" hidden>
-<div>Send <b id="sumAmt"></b></div>
-<div class="mono" style="margin-top:6px">to <span id="sumTo"></span></div>
-<div class="row"><button id="confirmBtn">Confirm in wallet</button><button class="sec" id="cancelBtn">Cancel</button></div>
-</div>
-<div class="note" id="sendMsg"></div>
-</section>
+  <section class="card" id="sendCard" hidden>
+    <h2>Send $SMRD</h2>
+    <label for="toInput">Recipient address</label>
+    <input id="toInput" type="text" inputmode="text" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="0x…">
+    <label for="amtInput">Amount</label>
+    <input id="amtInput" type="text" inputmode="decimal" autocomplete="off" placeholder="0.0">
+    <div style="text-align:right"><a href="#" id="maxLink" class="fine">Use max</a></div>
+    <button id="reviewBtn" type="button" style="margin-top:8px">Review</button>
+    <div class="msg" id="sendMsg" role="status" aria-live="polite"></div>
+    <div class="review" id="reviewBox" hidden>
+      <div><b>Check before you confirm</b></div>
+      <div>To: <span class="addr" id="rvTo" style="color:var(--text)"></span></div>
+      <div>Amount: <b id="rvAmt"></b> SMRD</div>
+      <div>Network: Polygon Amoy (test)</div>
+      <div class="row" style="margin-top:10px">
+        <button class="secondary" id="editBtn" type="button">Edit</button>
+        <button id="confirmBtn" type="button">Confirm in wallet</button>
+      </div>
+    </div>
+  </section>
 
-<section class="card">
-<h2>Receive $SMRD</h2>
-<div id="qrBox"></div>
-<div class="mono" id="addrText" style="text-align:center"></div>
-<div class="row"><button class="sec" id="copyBtn2">Copy address</button></div>
-</section>
+  <section class="card" id="receiveCard" hidden>
+    <h2>Receive $SMRD</h2>
+    <div id="qrBox" aria-label="QR code of your wallet address"></div>
+    <div class="addr" id="rcvAddr" style="text-align:center"></div>
+    <button class="secondary" id="copyBtn" type="button" style="margin-top:10px">Copy address</button>
+    <div class="msg info" id="copyMsg" role="status" aria-live="polite"></div>
+  </section>
 
-<section class="card" id="activity" hidden>
-<h2>This session</h2>
-<ul class="act" id="actList"></ul>
-</section>
-</div>
+  <section class="card" id="activityCard" hidden>
+    <h2>This session’s activity</h2>
+    <ul class="act" id="actList"></ul>
+    <p class="fine" style="margin-bottom:0">Full history: <a id="histLink" target="_blank" rel="noopener" href="#">view on Polygonscan</a></p>
+  </section>
 
-<section class="card">
-<details><summary>How to use on iPhone or Android</summary>
-<div>1. Install the MetaMask app and create a wallet.<br>2. In MetaMask, open the browser and go to this page's address.<br>3. Tap Connect wallet, then approve. The portal switches you to the test network.<br>4. Get free test POL from the faucet, then try sending a small amount of $SMRD to a friend.</div></details>
-<div class="note">Token contract: <span class="mono" id="tokAddr">checking…</span> <a id="tokLink" href="#" target="_blank" rel="noopener" hidden>View on Polygonscan</a></div>
-<div class="foot">Prototype for demonstration only. Nothing here is financial advice or an offer to sell tokens. The legal classification of $SMRD has not been determined. <a href="index.html">Back to the Samrudo website</a>.</div>
-</section>
-</div>
+  <section class="card">
+    <h2>About this prototype</h2>
+    <p class="fine" style="margin-top:0">Token contract (Polygon Amoy test network):</p>
+    <div class="addr" id="tokenText">Looking up…</div>
+    <p class="fine"><a id="tokenLink" target="_blank" rel="noopener" href="#" hidden>View token on Polygonscan</a></p>
+    <details>
+      <summary>How to use this on a phone</summary>
+      <p>Open the MetaMask app, tap the browser icon, and enter this page’s address. Or tap “Open this page in the MetaMask app” above. iPhone and Android both work.</p>
+    </details>
+    <p class="fine">Prototype only. Nothing here is financial advice or an offer to sell tokens, and the legal classification of $SMRD has not been determined. <a href="index.html">Back to samrudo.com</a></p>
+  </section>
+
+</main>
 
 <script>
-/* QR encoder: QRCode for JavaScript, Copyright (c) 2009 Kazuhiko Arase, MIT license (http://www.opensource.org/licenses/mit-license.php). 'QR Code' is a registered trademark of DENSO WAVE INCORPORATED. Bundled unmodified apart from module wrapping. */
-var QRLib=(function(){var defs={},cache={};function def(n,f){defs[n]=f;}function req(n){if(cache[n])return cache[n].exports;var m={exports:{}};cache[n]=m;defs[n](m,m.exports,req);return m.exports;}
-def('./QRMode',function(module,exports,require){
+/* QR encoder: "QRCode for JavaScript" by Kazuhiko Arase, MIT license (http://www.d-project.com/).
+   "QR Code" is a registered trademark of DENSO WAVE INCORPORATED. Bundled inline so this page loads no third-party scripts. */
+(function(){
+var __m={};
+function __def(n,f){__m[n]={exports:{},fn:f,done:false};}
+function __req(p){var n=p.replace('./','');var m=__m[n];if(!m.done){m.done=true;m.fn(m,m.exports,__req);}return m.exports;}
+__def('QRMode',function(module,exports,require){
 module.exports = {
     MODE_NUMBER :       1 << 0,
     MODE_ALPHA_NUM :    1 << 1,
@@ -134,7 +147,7 @@ module.exports = {
 };
 
 });
-def('./QRErrorCorrectLevel',function(module,exports,require){
+__def('QRErrorCorrectLevel',function(module,exports,require){
 module.exports = {
 	L : 1,
 	M : 0,
@@ -144,7 +157,7 @@ module.exports = {
 
 
 });
-def('./QRMaskPattern',function(module,exports,require){
+__def('QRMaskPattern',function(module,exports,require){
 module.exports = {
 	PATTERN000 : 0,
 	PATTERN001 : 1,
@@ -157,7 +170,7 @@ module.exports = {
 };
 
 });
-def('./QRMath',function(module,exports,require){
+__def('QRMath',function(module,exports,require){
 var QRMath = {
 
 	glog : function(n) {
@@ -204,7 +217,7 @@ for (var i = 0; i < 255; i++) {
 module.exports = QRMath;
 
 });
-def('./QRPolynomial',function(module,exports,require){
+__def('QRPolynomial',function(module,exports,require){
 var QRMath = require('./QRMath');
 
 function QRPolynomial(num, shift) {
@@ -273,73 +286,282 @@ QRPolynomial.prototype = {
 module.exports = QRPolynomial;
 
 });
-def('./QRBitBuffer',function(module,exports,require){
-function QRBitBuffer() {
-	this.buffer = [];
-	this.length = 0;
-}
-
-QRBitBuffer.prototype = {
-
-	get : function(index) {
-		var bufIndex = Math.floor(index / 8);
-		return ( (this.buffer[bufIndex] >>> (7 - index % 8) ) & 1) == 1;
-	},
-	
-	put : function(num, length) {
-		for (var i = 0; i < length; i++) {
-			this.putBit( ( (num >>> (length - i - 1) ) & 1) == 1);
-		}
-	},
-	
-	getLengthInBits : function() {
-		return this.length;
-	},
-	
-	putBit : function(bit) {
-	
-		var bufIndex = Math.floor(this.length / 8);
-		if (this.buffer.length <= bufIndex) {
-			this.buffer.push(0);
-		}
-	
-		if (bit) {
-			this.buffer[bufIndex] |= (0x80 >>> (this.length % 8) );
-		}
-	
-		this.length++;
-	}
-};
-
-module.exports = QRBitBuffer;
-
-});
-def('./QR8bitByte',function(module,exports,require){
+__def('QRUtil',function(module,exports,require){
 var QRMode = require('./QRMode');
+var QRPolynomial = require('./QRPolynomial');
+var QRMath = require('./QRMath');
+var QRMaskPattern = require('./QRMaskPattern');
 
-function QR8bitByte(data) {
-	this.mode = QRMode.MODE_8BIT_BYTE;
-	this.data = data;
-}
+var QRUtil = {
 
-QR8bitByte.prototype = {
+    PATTERN_POSITION_TABLE : [
+        [],
+        [6, 18],
+        [6, 22],
+        [6, 26],
+        [6, 30],
+        [6, 34],
+        [6, 22, 38],
+        [6, 24, 42],
+        [6, 26, 46],
+        [6, 28, 50],
+        [6, 30, 54],        
+        [6, 32, 58],
+        [6, 34, 62],
+        [6, 26, 46, 66],
+        [6, 26, 48, 70],
+        [6, 26, 50, 74],
+        [6, 30, 54, 78],
+        [6, 30, 56, 82],
+        [6, 30, 58, 86],
+        [6, 34, 62, 90],
+        [6, 28, 50, 72, 94],
+        [6, 26, 50, 74, 98],
+        [6, 30, 54, 78, 102],
+        [6, 28, 54, 80, 106],
+        [6, 32, 58, 84, 110],
+        [6, 30, 58, 86, 114],
+        [6, 34, 62, 90, 118],
+        [6, 26, 50, 74, 98, 122],
+        [6, 30, 54, 78, 102, 126],
+        [6, 26, 52, 78, 104, 130],
+        [6, 30, 56, 82, 108, 134],
+        [6, 34, 60, 86, 112, 138],
+        [6, 30, 58, 86, 114, 142],
+        [6, 34, 62, 90, 118, 146],
+        [6, 30, 54, 78, 102, 126, 150],
+        [6, 24, 50, 76, 102, 128, 154],
+        [6, 28, 54, 80, 106, 132, 158],
+        [6, 32, 58, 84, 110, 136, 162],
+        [6, 26, 54, 82, 110, 138, 166],
+        [6, 30, 58, 86, 114, 142, 170]
+    ],
 
-	getLength : function() {
-		return this.data.length;
-	},
-	
-	write : function(buffer) {
-		for (var i = 0; i < this.data.length; i++) {
-			// not JIS ...
-			buffer.put(this.data.charCodeAt(i), 8);
-		}
-	}
+    G15 : (1 << 10) | (1 << 8) | (1 << 5) | (1 << 4) | (1 << 2) | (1 << 1) | (1 << 0),
+    G18 : (1 << 12) | (1 << 11) | (1 << 10) | (1 << 9) | (1 << 8) | (1 << 5) | (1 << 2) | (1 << 0),
+    G15_MASK : (1 << 14) | (1 << 12) | (1 << 10)    | (1 << 4) | (1 << 1),
+
+    getBCHTypeInfo : function(data) {
+        var d = data << 10;
+        while (QRUtil.getBCHDigit(d) - QRUtil.getBCHDigit(QRUtil.G15) >= 0) {
+            d ^= (QRUtil.G15 << (QRUtil.getBCHDigit(d) - QRUtil.getBCHDigit(QRUtil.G15) ) );    
+        }
+        return ( (data << 10) | d) ^ QRUtil.G15_MASK;
+    },
+
+    getBCHTypeNumber : function(data) {
+        var d = data << 12;
+        while (QRUtil.getBCHDigit(d) - QRUtil.getBCHDigit(QRUtil.G18) >= 0) {
+            d ^= (QRUtil.G18 << (QRUtil.getBCHDigit(d) - QRUtil.getBCHDigit(QRUtil.G18) ) );    
+        }
+        return (data << 12) | d;
+    },
+
+    getBCHDigit : function(data) {
+
+        var digit = 0;
+
+        while (data !== 0) {
+            digit++;
+            data >>>= 1;
+        }
+
+        return digit;
+    },
+
+    getPatternPosition : function(typeNumber) {
+        return QRUtil.PATTERN_POSITION_TABLE[typeNumber - 1];
+    },
+
+    getMask : function(maskPattern, i, j) {
+        
+        switch (maskPattern) {
+            
+        case QRMaskPattern.PATTERN000 : return (i + j) % 2 === 0;
+        case QRMaskPattern.PATTERN001 : return i % 2 === 0;
+        case QRMaskPattern.PATTERN010 : return j % 3 === 0;
+        case QRMaskPattern.PATTERN011 : return (i + j) % 3 === 0;
+        case QRMaskPattern.PATTERN100 : return (Math.floor(i / 2) + Math.floor(j / 3) ) % 2 === 0;
+        case QRMaskPattern.PATTERN101 : return (i * j) % 2 + (i * j) % 3 === 0;
+        case QRMaskPattern.PATTERN110 : return ( (i * j) % 2 + (i * j) % 3) % 2 === 0;
+        case QRMaskPattern.PATTERN111 : return ( (i * j) % 3 + (i + j) % 2) % 2 === 0;
+
+        default :
+            throw new Error("bad maskPattern:" + maskPattern);
+        }
+    },
+
+    getErrorCorrectPolynomial : function(errorCorrectLength) {
+
+        var a = new QRPolynomial([1], 0);
+
+        for (var i = 0; i < errorCorrectLength; i++) {
+            a = a.multiply(new QRPolynomial([1, QRMath.gexp(i)], 0) );
+        }
+
+        return a;
+    },
+
+    getLengthInBits : function(mode, type) {
+
+        if (1 <= type && type < 10) {
+
+            // 1 - 9
+
+            switch(mode) {
+            case QRMode.MODE_NUMBER     : return 10;
+            case QRMode.MODE_ALPHA_NUM  : return 9;
+            case QRMode.MODE_8BIT_BYTE  : return 8;
+            case QRMode.MODE_KANJI      : return 8;
+            default :
+                throw new Error("mode:" + mode);
+            }
+
+        } else if (type < 27) {
+
+            // 10 - 26
+
+            switch(mode) {
+            case QRMode.MODE_NUMBER     : return 12;
+            case QRMode.MODE_ALPHA_NUM  : return 11;
+            case QRMode.MODE_8BIT_BYTE  : return 16;
+            case QRMode.MODE_KANJI      : return 10;
+            default :
+                throw new Error("mode:" + mode);
+            }
+
+        } else if (type < 41) {
+
+            // 27 - 40
+
+            switch(mode) {
+            case QRMode.MODE_NUMBER     : return 14;
+            case QRMode.MODE_ALPHA_NUM  : return 13;
+            case QRMode.MODE_8BIT_BYTE  : return 16;
+            case QRMode.MODE_KANJI      : return 12;
+            default :
+                throw new Error("mode:" + mode);
+            }
+
+        } else {
+            throw new Error("type:" + type);
+        }
+    },
+
+    getLostPoint : function(qrCode) {
+        
+        var moduleCount = qrCode.getModuleCount();
+        var lostPoint = 0;
+        var row = 0; 
+        var col = 0;
+
+        
+        // LEVEL1
+        
+        for (row = 0; row < moduleCount; row++) {
+
+            for (col = 0; col < moduleCount; col++) {
+
+                var sameCount = 0;
+                var dark = qrCode.isDark(row, col);
+
+                for (var r = -1; r <= 1; r++) {
+
+                    if (row + r < 0 || moduleCount <= row + r) {
+                        continue;
+                    }
+
+                    for (var c = -1; c <= 1; c++) {
+
+                        if (col + c < 0 || moduleCount <= col + c) {
+                            continue;
+                        }
+
+                        if (r === 0 && c === 0) {
+                            continue;
+                        }
+
+                        if (dark === qrCode.isDark(row + r, col + c) ) {
+                            sameCount++;
+                        }
+                    }
+                }
+
+                if (sameCount > 5) {
+                    lostPoint += (3 + sameCount - 5);
+                }
+            }
+        }
+
+        // LEVEL2
+
+        for (row = 0; row < moduleCount - 1; row++) {
+            for (col = 0; col < moduleCount - 1; col++) {
+                var count = 0;
+                if (qrCode.isDark(row,     col    ) ) count++;
+                if (qrCode.isDark(row + 1, col    ) ) count++;
+                if (qrCode.isDark(row,     col + 1) ) count++;
+                if (qrCode.isDark(row + 1, col + 1) ) count++;
+                if (count === 0 || count === 4) {
+                    lostPoint += 3;
+                }
+            }
+        }
+
+        // LEVEL3
+
+        for (row = 0; row < moduleCount; row++) {
+            for (col = 0; col < moduleCount - 6; col++) {
+                if (qrCode.isDark(row, col) && 
+                        !qrCode.isDark(row, col + 1) && 
+                         qrCode.isDark(row, col + 2) && 
+                         qrCode.isDark(row, col + 3) && 
+                         qrCode.isDark(row, col + 4) && 
+                        !qrCode.isDark(row, col + 5) && 
+                         qrCode.isDark(row, col + 6) ) {
+                    lostPoint += 40;
+                }
+            }
+        }
+
+        for (col = 0; col < moduleCount; col++) {
+            for (row = 0; row < moduleCount - 6; row++) {
+                if (qrCode.isDark(row, col) &&
+                        !qrCode.isDark(row + 1, col) &&
+                         qrCode.isDark(row + 2, col) &&
+                         qrCode.isDark(row + 3, col) &&
+                         qrCode.isDark(row + 4, col) &&
+                        !qrCode.isDark(row + 5, col) &&
+                         qrCode.isDark(row + 6, col) ) {
+                    lostPoint += 40;
+                }
+            }
+        }
+
+        // LEVEL4
+        
+        var darkCount = 0;
+
+        for (col = 0; col < moduleCount; col++) {
+            for (row = 0; row < moduleCount; row++) {
+                if (qrCode.isDark(row, col) ) {
+                    darkCount++;
+                }
+            }
+        }
+        
+        var ratio = Math.abs(100 * darkCount / moduleCount / moduleCount - 50) / 5;
+        lostPoint += ratio * 10;
+
+        return lostPoint;       
+    }
+
 };
 
-module.exports = QR8bitByte;
+module.exports = QRUtil;
 
 });
-def('./QRRSBlock',function(module,exports,require){
+__def('QRRSBlock',function(module,exports,require){
 var QRErrorCorrectLevel = require('./QRErrorCorrectLevel');
 
 function QRRSBlock(totalCount, dataCount) {
@@ -640,282 +862,73 @@ QRRSBlock.getRsBlockTable = function(typeNumber, errorCorrectLevel) {
 module.exports = QRRSBlock;
 
 });
-def('./QRUtil',function(module,exports,require){
-var QRMode = require('./QRMode');
-var QRPolynomial = require('./QRPolynomial');
-var QRMath = require('./QRMath');
-var QRMaskPattern = require('./QRMaskPattern');
+__def('QRBitBuffer',function(module,exports,require){
+function QRBitBuffer() {
+	this.buffer = [];
+	this.length = 0;
+}
 
-var QRUtil = {
+QRBitBuffer.prototype = {
 
-    PATTERN_POSITION_TABLE : [
-        [],
-        [6, 18],
-        [6, 22],
-        [6, 26],
-        [6, 30],
-        [6, 34],
-        [6, 22, 38],
-        [6, 24, 42],
-        [6, 26, 46],
-        [6, 28, 50],
-        [6, 30, 54],        
-        [6, 32, 58],
-        [6, 34, 62],
-        [6, 26, 46, 66],
-        [6, 26, 48, 70],
-        [6, 26, 50, 74],
-        [6, 30, 54, 78],
-        [6, 30, 56, 82],
-        [6, 30, 58, 86],
-        [6, 34, 62, 90],
-        [6, 28, 50, 72, 94],
-        [6, 26, 50, 74, 98],
-        [6, 30, 54, 78, 102],
-        [6, 28, 54, 80, 106],
-        [6, 32, 58, 84, 110],
-        [6, 30, 58, 86, 114],
-        [6, 34, 62, 90, 118],
-        [6, 26, 50, 74, 98, 122],
-        [6, 30, 54, 78, 102, 126],
-        [6, 26, 52, 78, 104, 130],
-        [6, 30, 56, 82, 108, 134],
-        [6, 34, 60, 86, 112, 138],
-        [6, 30, 58, 86, 114, 142],
-        [6, 34, 62, 90, 118, 146],
-        [6, 30, 54, 78, 102, 126, 150],
-        [6, 24, 50, 76, 102, 128, 154],
-        [6, 28, 54, 80, 106, 132, 158],
-        [6, 32, 58, 84, 110, 136, 162],
-        [6, 26, 54, 82, 110, 138, 166],
-        [6, 30, 58, 86, 114, 142, 170]
-    ],
-
-    G15 : (1 << 10) | (1 << 8) | (1 << 5) | (1 << 4) | (1 << 2) | (1 << 1) | (1 << 0),
-    G18 : (1 << 12) | (1 << 11) | (1 << 10) | (1 << 9) | (1 << 8) | (1 << 5) | (1 << 2) | (1 << 0),
-    G15_MASK : (1 << 14) | (1 << 12) | (1 << 10)    | (1 << 4) | (1 << 1),
-
-    getBCHTypeInfo : function(data) {
-        var d = data << 10;
-        while (QRUtil.getBCHDigit(d) - QRUtil.getBCHDigit(QRUtil.G15) >= 0) {
-            d ^= (QRUtil.G15 << (QRUtil.getBCHDigit(d) - QRUtil.getBCHDigit(QRUtil.G15) ) );    
-        }
-        return ( (data << 10) | d) ^ QRUtil.G15_MASK;
-    },
-
-    getBCHTypeNumber : function(data) {
-        var d = data << 12;
-        while (QRUtil.getBCHDigit(d) - QRUtil.getBCHDigit(QRUtil.G18) >= 0) {
-            d ^= (QRUtil.G18 << (QRUtil.getBCHDigit(d) - QRUtil.getBCHDigit(QRUtil.G18) ) );    
-        }
-        return (data << 12) | d;
-    },
-
-    getBCHDigit : function(data) {
-
-        var digit = 0;
-
-        while (data !== 0) {
-            digit++;
-            data >>>= 1;
-        }
-
-        return digit;
-    },
-
-    getPatternPosition : function(typeNumber) {
-        return QRUtil.PATTERN_POSITION_TABLE[typeNumber - 1];
-    },
-
-    getMask : function(maskPattern, i, j) {
-        
-        switch (maskPattern) {
-            
-        case QRMaskPattern.PATTERN000 : return (i + j) % 2 === 0;
-        case QRMaskPattern.PATTERN001 : return i % 2 === 0;
-        case QRMaskPattern.PATTERN010 : return j % 3 === 0;
-        case QRMaskPattern.PATTERN011 : return (i + j) % 3 === 0;
-        case QRMaskPattern.PATTERN100 : return (Math.floor(i / 2) + Math.floor(j / 3) ) % 2 === 0;
-        case QRMaskPattern.PATTERN101 : return (i * j) % 2 + (i * j) % 3 === 0;
-        case QRMaskPattern.PATTERN110 : return ( (i * j) % 2 + (i * j) % 3) % 2 === 0;
-        case QRMaskPattern.PATTERN111 : return ( (i * j) % 3 + (i + j) % 2) % 2 === 0;
-
-        default :
-            throw new Error("bad maskPattern:" + maskPattern);
-        }
-    },
-
-    getErrorCorrectPolynomial : function(errorCorrectLength) {
-
-        var a = new QRPolynomial([1], 0);
-
-        for (var i = 0; i < errorCorrectLength; i++) {
-            a = a.multiply(new QRPolynomial([1, QRMath.gexp(i)], 0) );
-        }
-
-        return a;
-    },
-
-    getLengthInBits : function(mode, type) {
-
-        if (1 <= type && type < 10) {
-
-            // 1 - 9
-
-            switch(mode) {
-            case QRMode.MODE_NUMBER     : return 10;
-            case QRMode.MODE_ALPHA_NUM  : return 9;
-            case QRMode.MODE_8BIT_BYTE  : return 8;
-            case QRMode.MODE_KANJI      : return 8;
-            default :
-                throw new Error("mode:" + mode);
-            }
-
-        } else if (type < 27) {
-
-            // 10 - 26
-
-            switch(mode) {
-            case QRMode.MODE_NUMBER     : return 12;
-            case QRMode.MODE_ALPHA_NUM  : return 11;
-            case QRMode.MODE_8BIT_BYTE  : return 16;
-            case QRMode.MODE_KANJI      : return 10;
-            default :
-                throw new Error("mode:" + mode);
-            }
-
-        } else if (type < 41) {
-
-            // 27 - 40
-
-            switch(mode) {
-            case QRMode.MODE_NUMBER     : return 14;
-            case QRMode.MODE_ALPHA_NUM  : return 13;
-            case QRMode.MODE_8BIT_BYTE  : return 16;
-            case QRMode.MODE_KANJI      : return 12;
-            default :
-                throw new Error("mode:" + mode);
-            }
-
-        } else {
-            throw new Error("type:" + type);
-        }
-    },
-
-    getLostPoint : function(qrCode) {
-        
-        var moduleCount = qrCode.getModuleCount();
-        var lostPoint = 0;
-        var row = 0; 
-        var col = 0;
-
-        
-        // LEVEL1
-        
-        for (row = 0; row < moduleCount; row++) {
-
-            for (col = 0; col < moduleCount; col++) {
-
-                var sameCount = 0;
-                var dark = qrCode.isDark(row, col);
-
-                for (var r = -1; r <= 1; r++) {
-
-                    if (row + r < 0 || moduleCount <= row + r) {
-                        continue;
-                    }
-
-                    for (var c = -1; c <= 1; c++) {
-
-                        if (col + c < 0 || moduleCount <= col + c) {
-                            continue;
-                        }
-
-                        if (r === 0 && c === 0) {
-                            continue;
-                        }
-
-                        if (dark === qrCode.isDark(row + r, col + c) ) {
-                            sameCount++;
-                        }
-                    }
-                }
-
-                if (sameCount > 5) {
-                    lostPoint += (3 + sameCount - 5);
-                }
-            }
-        }
-
-        // LEVEL2
-
-        for (row = 0; row < moduleCount - 1; row++) {
-            for (col = 0; col < moduleCount - 1; col++) {
-                var count = 0;
-                if (qrCode.isDark(row,     col    ) ) count++;
-                if (qrCode.isDark(row + 1, col    ) ) count++;
-                if (qrCode.isDark(row,     col + 1) ) count++;
-                if (qrCode.isDark(row + 1, col + 1) ) count++;
-                if (count === 0 || count === 4) {
-                    lostPoint += 3;
-                }
-            }
-        }
-
-        // LEVEL3
-
-        for (row = 0; row < moduleCount; row++) {
-            for (col = 0; col < moduleCount - 6; col++) {
-                if (qrCode.isDark(row, col) && 
-                        !qrCode.isDark(row, col + 1) && 
-                         qrCode.isDark(row, col + 2) && 
-                         qrCode.isDark(row, col + 3) && 
-                         qrCode.isDark(row, col + 4) && 
-                        !qrCode.isDark(row, col + 5) && 
-                         qrCode.isDark(row, col + 6) ) {
-                    lostPoint += 40;
-                }
-            }
-        }
-
-        for (col = 0; col < moduleCount; col++) {
-            for (row = 0; row < moduleCount - 6; row++) {
-                if (qrCode.isDark(row, col) &&
-                        !qrCode.isDark(row + 1, col) &&
-                         qrCode.isDark(row + 2, col) &&
-                         qrCode.isDark(row + 3, col) &&
-                         qrCode.isDark(row + 4, col) &&
-                        !qrCode.isDark(row + 5, col) &&
-                         qrCode.isDark(row + 6, col) ) {
-                    lostPoint += 40;
-                }
-            }
-        }
-
-        // LEVEL4
-        
-        var darkCount = 0;
-
-        for (col = 0; col < moduleCount; col++) {
-            for (row = 0; row < moduleCount; row++) {
-                if (qrCode.isDark(row, col) ) {
-                    darkCount++;
-                }
-            }
-        }
-        
-        var ratio = Math.abs(100 * darkCount / moduleCount / moduleCount - 50) / 5;
-        lostPoint += ratio * 10;
-
-        return lostPoint;       
-    }
-
+	get : function(index) {
+		var bufIndex = Math.floor(index / 8);
+		return ( (this.buffer[bufIndex] >>> (7 - index % 8) ) & 1) == 1;
+	},
+	
+	put : function(num, length) {
+		for (var i = 0; i < length; i++) {
+			this.putBit( ( (num >>> (length - i - 1) ) & 1) == 1);
+		}
+	},
+	
+	getLengthInBits : function() {
+		return this.length;
+	},
+	
+	putBit : function(bit) {
+	
+		var bufIndex = Math.floor(this.length / 8);
+		if (this.buffer.length <= bufIndex) {
+			this.buffer.push(0);
+		}
+	
+		if (bit) {
+			this.buffer[bufIndex] |= (0x80 >>> (this.length % 8) );
+		}
+	
+		this.length++;
+	}
 };
 
-module.exports = QRUtil;
+module.exports = QRBitBuffer;
 
 });
-def('./index',function(module,exports,require){
+__def('QR8bitByte',function(module,exports,require){
+var QRMode = require('./QRMode');
+
+function QR8bitByte(data) {
+	this.mode = QRMode.MODE_8BIT_BYTE;
+	this.data = data;
+}
+
+QR8bitByte.prototype = {
+
+	getLength : function() {
+		return this.data.length;
+	},
+	
+	write : function(buffer) {
+		for (var i = 0; i < this.data.length; i++) {
+			// not JIS ...
+			buffer.put(this.data.charCodeAt(i), 8);
+		}
+	}
+};
+
+module.exports = QR8bitByte;
+
+});
+__def('index',function(module,exports,require){
 //---------------------------------------------------------------------
 // QRCode for JavaScript
 //
@@ -1380,167 +1393,241 @@ QRCode.createBytes = function(buffer, rsBlocks) {
 module.exports = QRCode;
 
 });
-return {QRCode:req('./index'),QRErrorCorrectLevel:req('./QRErrorCorrectLevel')};})();
+window.SamrudoQR={QRCode:__req('index'),QRErrorCorrectLevel:__req('QRErrorCorrectLevel')};
+})();
 </script>
-<script>
-(function(){
-"use strict";
-var CFG={
-  TOKEN:"",
-  POLL_MS:3000,
-  CHAIN:{chainId:"0x13882",chainName:"Polygon Amoy Testnet",nativeCurrency:{name:"POL",symbol:"POL",decimals:18},rpcUrls:["https://rpc-amoy.polygon.technology"],blockExplorerUrls:["https://amoy.polygonscan.com"]},
-  EXPLORER:"https://amoy.polygonscan.com"
-};
-var ADDR_RE=/^0x[a-fA-F0-9]{40}$/;
-var S={account:null,token:null,ok:false,balance:0n,pol:0n,pending:null,activity:[],bound:false};
-function $(id){return document.getElementById(id);}
-function msg(id,t,kind){var e=$(id);e.textContent=t||"";e.className="note"+(kind?" "+kind:"");}
-function provider(){var e=window.ethereum;if(!e)return null;if(e.providers&&e.providers.length){return e.providers.find(function(p){return p.isMetaMask;})||e.providers[0];}return e;}
-function req(method,params){var p=provider();if(!p)return Promise.reject(new Error("No wallet found"));return p.request({method:method,params:params||[]});}
-function pad(h){return h.replace(/^0x/,"").toLowerCase().padStart(64,"0");}
-function sleep(ms){return new Promise(function(r){setTimeout(r,ms);});}
-var D18=10n**18n;
-function fmt(u,maxFrac){if(maxFrac==null)maxFrac=4;var w=u/D18,f=u%D18;var fs=f.toString().padStart(18,"0").slice(0,maxFrac).replace(/0+$/,"");var ws=w.toString().replace(/\B(?=(\d{3})+(?!\d))/g,",");if(w===0n&&f>0n&&fs==="")return "< 0."+"0".repeat(maxFrac-1)+"1";return fs?ws+"."+fs:ws;}
-function plain(u){var w=u/D18,f=(u%D18).toString().padStart(18,"0").replace(/0+$/,"");return f?w.toString()+"."+f:w.toString();}
-function parseAmt(s){s=s.trim();if(!/^\d+(\.\d{1,18})?$/.test(s))return null;var p=s.split(".");return BigInt(p[0])*D18+BigInt((p[1]||"").padEnd(18,"0"));}
-function short(a){return a.slice(0,6)+"…"+a.slice(-4);}
-function setNet(state){var c=$("netChip");if(state==="ok"){c.textContent="Polygon Amoy (test)";c.className="chip ok";}else if(state==="bad"){c.textContent="Wrong network";c.className="chip bad";}else{c.textContent="Not connected";c.className="chip";}}
 
-async function resolveToken(){
-  if(ADDR_RE.test(CFG.TOKEN))return CFG.TOKEN;
-  try{var r=await fetch("index.html",{cache:"no-store"});var t=await r.text();var m=t.match(/var\s+SMRD_ADDRESS\s*=\s*"(0x[a-fA-F0-9]{40})"/);if(m)return m[1];}catch(e){}
-  return null;
-}
-function decodeStr(hex){hex=hex.replace(/^0x/,"");if(hex.length<128)return "";var len=parseInt(hex.slice(64,128),16);var b=hex.slice(128,128+len*2);var s="";for(var i=0;i<b.length;i+=2)s+=String.fromCharCode(parseInt(b.substr(i,2),16));return s;}
-async function call(to,data){return req("eth_call",[{to:to,data:data},"latest"]);}
-async function verifyToken(){
-  var code=await req("eth_getCode",[S.token,"latest"]);
-  if(!code||code==="0x")throw new Error("No contract found at the token address on this network.");
-  var sym=decodeStr(await call(S.token,"0x95d89b41"));
-  var dec=parseInt(await call(S.token,"0x313ce567"),16);
-  if(sym!=="SMRD"||dec!==18)throw new Error("The token at this address does not look like SMRD. Sending is disabled.");
-}
-async function switchChain(){
-  try{await req("wallet_switchEthereumChain",[{chainId:CFG.CHAIN.chainId}]);}
-  catch(e){if(e&&e.code===4001)throw e;await req("wallet_addEthereumChain",[CFG.CHAIN]);}
-}
-function drawQR(text){
-  var q=new QRLib.QRCode(-1,QRLib.QRErrorCorrectLevel.M);q.addData(text);q.make();
-  var n=q.getModuleCount(),quiet=4,size=n+quiet*2,NS="http://www.w3.org/2000/svg";
-  var svg=document.createElementNS(NS,"svg");svg.setAttribute("viewBox","0 0 "+size+" "+size);svg.setAttribute("shape-rendering","crispEdges");svg.setAttribute("role","img");svg.setAttribute("aria-label","QR code of your wallet address");
-  var bg=document.createElementNS(NS,"rect");bg.setAttribute("width",size);bg.setAttribute("height",size);bg.setAttribute("fill","#fff");svg.appendChild(bg);
-  var d="";for(var r=0;r<n;r++)for(var c=0;c<n;c++)if(q.isDark(r,c))d+="M"+(c+quiet)+" "+(r+quiet)+"h1v1h-1z";
-  var p=document.createElementNS(NS,"path");p.setAttribute("d",d);p.setAttribute("fill","#000");svg.appendChild(p);
-  var box=$("qrBox");while(box.firstChild)box.removeChild(box.firstChild);box.appendChild(svg);
-}
-async function refresh(){
-  if(!S.account)return;
-  var cid=await req("eth_chainId");
-  var on=parseInt(cid,16)===parseInt(CFG.CHAIN.chainId,16);
-  setNet(on?"ok":"bad");
-  $("wrongNet").hidden=on;
-  if(!on){$("mainPanels").hidden=true;return;}
-  if(!S.ok){
-    try{await verifyToken();S.ok=true;msg("tokenMsg","");}
-    catch(e){msg("tokenMsg",e.message,"err");$("mainPanels").hidden=false;$("reviewBtn").disabled=true;return;}
+<script>
+(function () {
+  'use strict';
+  var CFG = {
+    TOKEN: "",   // Optional: paste the $SMRD contract address here. If left empty, the portal reads it from index.html on this site.
+    SYMBOL: "SMRD", DECIMALS: 18,
+    CHAIN: { chainId: "0x13882", chainName: "Polygon Amoy Testnet", nativeCurrency: { name: "POL", symbol: "POL", decimals: 18 }, rpcUrls: ["https://rpc-amoy.polygon.technology"], blockExplorerUrls: ["https://amoy.polygonscan.com"] },
+    EXPLORER: "https://amoy.polygonscan.com",
+    POLL_MS: 3000
+  };
+  var ADDR_RE = /^0x[a-fA-F0-9]{40}$/;
+  var S = { eth: null, account: null, token: null, tokenChecked: false, tokenErr: null, balance: 0n, pol: 0n, draft: null, bound: false };
+  var $ = function (id) { return document.getElementById(id); };
+  var sleep = function (ms) { return new Promise(function (r) { setTimeout(r, ms); }); };
+
+  function setMsg(id, text, kind) { var el = $(id); el.textContent = text || ''; el.className = 'msg ' + (kind || 'info'); }
+  function show(id, on) { $(id).hidden = !on; }
+  function short(a) { return a.slice(0, 6) + '…' + a.slice(-4); }
+  function pad(a) { return a.toLowerCase().replace(/^0x/, '').padStart(64, '0'); }
+  function errText(e) {
+    if (e && (e.code === 4001 || e.code === 'ACTION_REJECTED')) return 'You cancelled the request in your wallet.';
+    var m = (e && (e.message || (e.data && e.data.message))) || 'Something went wrong.';
+    return String(m).slice(0, 160);
   }
-  $("reviewBtn").disabled=false;
-  S.balance=BigInt(await call(S.token,"0x70a08231"+pad(S.account)));
-  S.pol=BigInt(await req("eth_getBalance",[S.account,"latest"]));
-  $("acct").textContent=S.account;$("addrText").textContent=S.account;
-  $("balSmrd").textContent=fmt(S.balance,4);$("balPol").textContent=fmt(S.pol,4);
-  $("polWarn").hidden=S.pol>0n;
-  try{drawQR(S.account);}catch(e){}
-  $("mainPanels").hidden=false;
-}
-function bind(){
-  if(S.bound)return;var p=provider();if(!p||!p.on)return;S.bound=true;
-  p.on("accountsChanged",function(a){S.account=(a&&a[0])||null;if(!S.account){$("mainPanels").hidden=true;$("wrongNet").hidden=true;setNet("none");}else refresh().catch(function(){});});
-  p.on("chainChanged",function(){refresh().catch(function(){});});
-}
-async function connect(){
-  if(!provider()){$("noWallet").hidden=false;return;}
-  $("noWallet").hidden=true;
-  try{
-    msg("connMsg","Opening your wallet…");
-    var a=await req("eth_requestAccounts");S.account=a[0];bind();
-    try{await switchChain();}catch(e){if(e&&e.code===4001)msg("connMsg","Network switch cancelled.","err");}
-    await refresh();
-    if(S.ok)msg("connMsg","Connected.","good");
-  }catch(e){msg("connMsg",e&&e.code===4001?"Connection cancelled.":"Could not connect: "+((e&&e.message)||e),"err");}
-}
-function addrLoose(a){return a.toLowerCase();}
-function review(){
-  msg("sendErr","");$("summary").hidden=true;S.pending=null;
-  var to=$("toAddr").value.trim(),amt=parseAmt($("amount").value);
-  function bad(t){msg("sendErr",t,"err");}
-  if(!ADDR_RE.test(to))return bad("Enter a valid wallet address: 0x followed by 40 characters.");
-  if(/^0x0{40}$/i.test(to))return bad("That is the zero address. Tokens sent there are lost.");
-  if(addrLoose(to)===addrLoose(S.token))return bad("That is the token contract address. Tokens sent there would be stuck.");
-  if(amt===null||amt<=0n)return bad("Enter an amount above zero, with up to 18 decimals.");
-  if(amt>S.balance)return bad("That is more than your balance.");
-  S.pending={to:to,amt:amt};
-  $("sumAmt").textContent=plain(amt)+" SMRD";$("sumTo").textContent=to;$("summary").hidden=false;
-}
-function addActivity(text,hash){var it={text:text,hash:hash,status:"pending"};S.activity.unshift(it);renderActivity();return it;}
-function renderActivity(){
-  var ul=$("actList");while(ul.firstChild)ul.removeChild(ul.firstChild);
-  S.activity.forEach(function(it){
-    var li=document.createElement("li");li.appendChild(document.createTextNode(it.text+" · "+it.status+" · "));
-    var a=document.createElement("a");a.href=CFG.EXPLORER+"/tx/"+it.hash;a.target="_blank";a.rel="noopener";a.textContent="View";li.appendChild(a);ul.appendChild(li);
-  });
-  $("activity").hidden=S.activity.length===0;
-}
-async function pollReceipt(it){
-  for(var i=0;i<60;i++){
-    await sleep(CFG.POLL_MS);var r=null;try{r=await req("eth_getTransactionReceipt",[it.hash]);}catch(e){}
-    if(r){it.status=(r.status==="0x1")?"confirmed":"failed";renderActivity();refresh().catch(function(){});return;}
+  function fmt(u, maxFrac) {
+    var base = 10n ** 18n, whole = u / base, frac = u % base;
+    var fs = frac.toString().padStart(18, '0').slice(0, maxFrac).replace(/0+$/, '');
+    var ws = whole.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+    if (u > 0n && whole === 0n && fs === '') return '< 0.' + '0'.repeat(maxFrac - 1) + '1';
+    return fs ? ws + '.' + fs : ws;
   }
-  it.status="not confirmed yet";renderActivity();
-}
-async function confirmSend(){
-  if(!S.pending)return;var pend=S.pending;
-  var data="0xa9059cbb"+pad(pend.to)+pend.amt.toString(16).padStart(64,"0");
-  $("confirmBtn").disabled=true;msg("sendMsg","Confirm in your wallet…");
-  try{
-    var h=await req("eth_sendTransaction",[{from:S.account,to:S.token,data:data,value:"0x0"}]);
-    $("summary").hidden=true;S.pending=null;$("toAddr").value="";$("amount").value="";
-    msg("sendMsg","Submitted. Waiting for confirmation…","good");
-    var it=addActivity("Sent "+plain(pend.amt)+" SMRD to "+short(pend.to),h);
-    pollReceipt(it).then(function(){msg("sendMsg",it.status==="confirmed"?"Confirmed.":"Status: "+it.status,it.status==="confirmed"?"good":"err");});
-  }catch(e){msg("sendMsg",e&&e.code===4001?"Cancelled in wallet.":"Could not send: "+((e&&e.message)||e),"err");}
-  $("confirmBtn").disabled=false;
-}
-function copyAddr(){
-  if(!S.account)return;
-  var done=function(){msg("tokenMsg","Address copied.","good");};
-  if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(S.account).then(done).catch(function(){msg("tokenMsg","Copy failed. Select the address and copy it manually.","err");});}
-  else{var t=document.createElement("textarea");t.value=S.account;document.body.appendChild(t);t.select();try{document.execCommand("copy");done();}catch(e){}document.body.removeChild(t);}
-}
-async function addToken(){
-  try{
-    var img=new URL("smrd-logo.png",location.href).href;
-    var ok=await req("wallet_watchAsset",{type:"ERC20",options:{address:S.token,symbol:"SMRD",decimals:18,image:img}});
-    msg("tokenMsg",ok?"Token added to your wallet.":"Token was not added.",ok?"good":"");
-  }catch(e){msg("tokenMsg","Could not add token: "+((e&&e.message)||e),"err");}
-}
-function init(){
-  if(/^https?:$/.test(location.protocol)){$("mmLink").href="https://metamask.app.link/dapp/"+location.host+location.pathname;}
-  $("connectBtn").addEventListener("click",connect);
-  $("switchBtn").addEventListener("click",function(){switchChain().then(refresh).catch(function(){});});
-  $("reviewBtn").addEventListener("click",review);
-  $("confirmBtn").addEventListener("click",confirmSend);
-  $("cancelBtn").addEventListener("click",function(){S.pending=null;$("summary").hidden=true;});
-  $("maxBtn").addEventListener("click",function(){$("amount").value=plain(S.balance);});
-  $("copyBtn").addEventListener("click",copyAddr);$("copyBtn2").addEventListener("click",copyAddr);
-  $("addTokenBtn").addEventListener("click",addToken);
-  resolveToken().then(function(t){
-    S.token=t;
-    if(t){$("tokAddr").textContent=t;var l=$("tokLink");l.href=CFG.EXPLORER+"/token/"+t;l.hidden=false;}
-    else{$("tokAddr").textContent="not configured";$("connectBtn").disabled=true;msg("connMsg","The token address is not set on this site yet.","err");}
-  });
-}
-init();
+  function toPlain(u) { var base = 10n ** 18n; var f = (u % base).toString().padStart(18, '0').replace(/0+$/, ''); return (u / base).toString() + (f ? '.' + f : ''); }
+  function parseUnits(s) {
+    s = (s || '').trim();
+    if (!/^\d+(\.\d{1,18})?$/.test(s)) return null;
+    var p = s.split('.');
+    return BigInt(p[0]) * 10n ** 18n + BigInt((p[1] || '').padEnd(18, '0'));
+  }
+  function getProvider() {
+    var e = window.ethereum; if (!e) return null;
+    if (e.providers && e.providers.length) return e.providers.find(function (p) { return p.isMetaMask; }) || e.providers[0];
+    return e;
+  }
+  function rpc(method, params) { return S.eth.request({ method: method, params: params === undefined ? [] : params }); }
+  function ethCall(to, data) { return rpc('eth_call', [{ to: to, data: data }, 'latest']); }
+  function decodeString(hex) {
+    var h = (hex || '').slice(2); if (h.length < 128) return '';
+    var len = parseInt(h.slice(64, 128), 16), out = '';
+    for (var i = 0; i < len; i++) out += String.fromCharCode(parseInt(h.substr(128 + i * 2, 2), 16));
+    return out;
+  }
+
+  async function resolveToken() {
+    if (ADDR_RE.test(CFG.TOKEN)) return CFG.TOKEN;
+    try {
+      var r = await fetch('index.html', { cache: 'no-store' });
+      var t = await r.text();
+      var m = t.match(/var\s+SMRD_ADDRESS\s*=\s*"(0x[a-fA-F0-9]{40})"/);
+      if (m) return m[1];
+    } catch (e) { /* fall through */ }
+    return null;
+  }
+  function showToken() {
+    if (S.token) {
+      $('tokenText').textContent = S.token;
+      var l = $('tokenLink'); l.href = CFG.EXPLORER + '/token/' + S.token; l.hidden = false;
+    } else {
+      $('tokenText').textContent = 'Token address not found. The portal cannot send or show balances until it is set.';
+    }
+  }
+  async function verifyToken() {
+    var code = await rpc('eth_getCode', [S.token, 'latest']);
+    if (!code || code === '0x') return 'No contract was found at the token address on Polygon Amoy.';
+    var sym = decodeString(await ethCall(S.token, '0x95d89b41'));
+    var dec = parseInt(await ethCall(S.token, '0x313ce567'), 16);
+    if (sym !== CFG.SYMBOL || dec !== CFG.DECIMALS) return 'The token address does not look like SMRD (found "' + sym + '", ' + dec + ' decimals). Sending is disabled.';
+    return null;
+  }
+
+  function showNoWallet() {
+    show('noWallet', true);
+    var link = $('mmLink');
+    if (/^https?:$/.test(location.protocol)) link.href = 'https://metamask.app.link/dapp/' + location.host + location.pathname + location.search;
+    setMsg('connectMsg', '', 'info');
+  }
+  function bindEvents() {
+    if (S.bound || !S.eth.on) return; S.bound = true;
+    S.eth.on('accountsChanged', function (a) {
+      if (!a || !a.length) { S.account = null; resetUi(); return; }
+      S.account = a[0]; S.draft = null; show('reviewBox', false); refresh();
+    });
+    S.eth.on('chainChanged', function () { refresh(); });
+  }
+  function resetUi() {
+    ['walletCard', 'wrongNet', 'sendCard', 'receiveCard', 'activityCard'].forEach(function (i) { show(i, false); });
+    show('connectCard', true); $('netChip').textContent = 'Not connected'; $('netChip').className = 'chip';
+    $('connectBtn').disabled = false;
+  }
+  async function ensureChain() {
+    var want = parseInt(CFG.CHAIN.chainId, 16);
+    if (parseInt(await rpc('eth_chainId'), 16) === want) return true;
+    try { await rpc('wallet_switchEthereumChain', [{ chainId: CFG.CHAIN.chainId }]); }
+    catch (e) {
+      if (e && (e.code === 4902 || e.code === -32603)) await rpc('wallet_addEthereumChain', [CFG.CHAIN]); else throw e;
+    }
+    return parseInt(await rpc('eth_chainId'), 16) === want;
+  }
+  async function connect() {
+    S.eth = getProvider();
+    if (!S.eth) { showNoWallet(); return; }
+    $('connectBtn').disabled = true; setMsg('connectMsg', 'Waiting for your wallet…', 'info');
+    try {
+      var acc = await rpc('eth_requestAccounts');
+      if (!acc || !acc.length) throw new Error('No account was shared.');
+      S.account = acc[0]; bindEvents();
+      try { await ensureChain(); } catch (e) { /* refresh() will show the wrong-network panel */ }
+      await refresh();
+    } catch (e) { setMsg('connectMsg', errText(e), 'bad'); $('connectBtn').disabled = false; }
+  }
+  async function refresh() {
+    if (!S.eth || !S.account) return;
+    try {
+      show('connectCard', false);
+      var onAmoy = parseInt(await rpc('eth_chainId'), 16) === parseInt(CFG.CHAIN.chainId, 16);
+      var chip = $('netChip');
+      chip.textContent = onAmoy ? 'Polygon Amoy (test)' : 'Wrong network'; chip.className = 'chip ' + (onAmoy ? 'ok' : 'bad');
+      $('acctText').textContent = S.account;
+      show('walletCard', true);
+      if (!onAmoy) { show('wrongNet', true); show('sendCard', false); show('receiveCard', false); show('activityCard', false); $('balSmrd').textContent = '–'; $('balPol').textContent = '–'; return; }
+      show('wrongNet', false);
+      if (!S.token) { setMsg('walletMsg', 'Token address not found, so balances are unavailable.', 'bad'); return; }
+      if (!S.tokenChecked) { S.tokenErr = await verifyToken(); S.tokenChecked = true; }
+      if (S.tokenErr) { setMsg('walletMsg', S.tokenErr, 'bad'); show('sendCard', false); return; }
+      setMsg('walletMsg', '', 'info');
+      S.balance = BigInt(await ethCall(S.token, '0x70a08231' + pad(S.account)));
+      S.pol = BigInt(await rpc('eth_getBalance', [S.account, 'latest']));
+      $('balSmrd').textContent = fmt(S.balance, 4); $('balPol').textContent = fmt(S.pol, 4);
+      show('gasHint', S.pol === 0n);
+      show('sendCard', true); show('receiveCard', true);
+      $('rcvAddr').textContent = S.account; drawQR(S.account);
+      $('histLink').href = CFG.EXPLORER + '/token/' + S.token + '?a=' + S.account;
+    } catch (e) { setMsg('walletMsg', errText(e), 'bad'); }
+  }
+
+  function drawQR(text) {
+    var box = $('qrBox'); box.textContent = '';
+    try {
+      var qr = new SamrudoQR.QRCode(-1, SamrudoQR.QRErrorCorrectLevel.M);
+      qr.addData(text); qr.make();
+      var n = qr.getModuleCount(), q = 4, size = n + q * 2, NS = 'http://www.w3.org/2000/svg', d = '';
+      for (var r = 0; r < n; r++) for (var c = 0; c < n; c++) if (qr.modules[r][c]) d += 'M' + (c + q) + ' ' + (r + q) + 'h1v1h-1z';
+      var svg = document.createElementNS(NS, 'svg'); svg.setAttribute('viewBox', '0 0 ' + size + ' ' + size); svg.setAttribute('shape-rendering', 'crispEdges');
+      var bg = document.createElementNS(NS, 'rect'); bg.setAttribute('width', size); bg.setAttribute('height', size); bg.setAttribute('fill', '#fff'); svg.appendChild(bg);
+      var p = document.createElementNS(NS, 'path'); p.setAttribute('d', d); p.setAttribute('fill', '#000'); svg.appendChild(p);
+      box.appendChild(svg);
+    } catch (e) { box.textContent = 'QR unavailable. Use the address below.'; }
+  }
+
+  function review() {
+    show('reviewBox', false); setMsg('sendMsg', '', 'info');
+    var to = $('toInput').value.trim(), amt = parseUnits($('amtInput').value);
+    if (!ADDR_RE.test(to)) return setMsg('sendMsg', 'Enter a valid wallet address: 0x followed by 40 characters.', 'bad');
+    if (/^0x0{40}$/i.test(to)) return setMsg('sendMsg', 'That is the empty (zero) address. Tokens sent there are lost.', 'bad');
+    if (to.toLowerCase() === S.token.toLowerCase()) return setMsg('sendMsg', 'That is the token contract itself. Tokens sent there would be locked forever.', 'bad');
+    if (amt === null || amt === 0n) return setMsg('sendMsg', 'Enter an amount greater than zero (up to 18 decimal places).', 'bad');
+    if (amt > S.balance) return setMsg('sendMsg', 'That is more than your SMRD balance.', 'bad');
+    if (S.pol === 0n) return setMsg('sendMsg', 'You need a little test POL to pay the network fee.', 'bad');
+    S.draft = { to: to, amt: amt };
+    $('rvTo').textContent = to; $('rvAmt').textContent = toPlain(amt); show('reviewBox', true);
+  }
+  async function confirmSend() {
+    var d = S.draft; if (!d) return;
+    var btn = $('confirmBtn'); btn.disabled = true; setMsg('sendMsg', 'Confirm the transaction in your wallet…', 'info');
+    try {
+      var data = '0xa9059cbb' + pad(d.to) + d.amt.toString(16).padStart(64, '0');
+      var hash = await rpc('eth_sendTransaction', [{ from: S.account, to: S.token, data: data, value: '0x0' }]);
+      show('reviewBox', false); S.draft = null; $('toInput').value = ''; $('amtInput').value = '';
+      setMsg('sendMsg', 'Submitted. Waiting for confirmation…', 'info');
+      var item = addActivity(hash, d); poll(hash, item);
+    } catch (e) { setMsg('sendMsg', errText(e), 'bad'); }
+    finally { btn.disabled = false; }
+  }
+  function addActivity(hash, d) {
+    show('activityCard', true);
+    var li = document.createElement('li');
+    var a = document.createElement('a'); a.href = CFG.EXPLORER + '/tx/' + hash; a.target = '_blank'; a.rel = 'noopener'; a.textContent = 'Sent ' + toPlain(d.amt) + ' SMRD to ' + short(d.to);
+    var st = document.createElement('div'); st.className = 'fine'; st.textContent = 'Pending…';
+    li.appendChild(a); li.appendChild(st); $('actList').insertBefore(li, $('actList').firstChild);
+    return st;
+  }
+  async function poll(hash, statusEl) {
+    for (var i = 0; i < 60; i++) {
+      await sleep(CFG.POLL_MS);
+      try {
+        var r = await rpc('eth_getTransactionReceipt', [hash]);
+        if (r) {
+          var ok = r.status === '0x1';
+          statusEl.textContent = ok ? 'Confirmed' : 'Failed on-chain'; statusEl.style.color = ok ? 'var(--ok)' : 'var(--bad)';
+          setMsg('sendMsg', ok ? 'Transfer confirmed.' : 'The transaction failed.', ok ? 'ok' : 'bad');
+          refresh(); return;
+        }
+      } catch (e) { /* keep polling */ }
+    }
+    statusEl.textContent = 'Still pending. Check Polygonscan.';
+  }
+  async function addToken() {
+    try {
+      var ok = await rpc('wallet_watchAsset', { type: 'ERC20', options: { address: S.token, symbol: CFG.SYMBOL, decimals: CFG.DECIMALS, image: new URL('smrd-logo.png', location.href).href } });
+      setMsg('walletMsg', ok ? 'Token added to your wallet.' : 'Token was not added.', ok ? 'ok' : 'info');
+    } catch (e) { setMsg('walletMsg', errText(e), 'bad'); }
+  }
+  async function copyAddr() {
+    try { await navigator.clipboard.writeText(S.account); setMsg('copyMsg', 'Address copied.', 'ok'); }
+    catch (e) { setMsg('copyMsg', 'Could not copy automatically. Select the address above and copy it.', 'info'); }
+  }
+
+  $('connectBtn').addEventListener('click', connect);
+  $('refreshBtn').addEventListener('click', refresh);
+  $('switchBtn').addEventListener('click', async function () { try { await ensureChain(); } catch (e) { setMsg('walletMsg', errText(e), 'bad'); } refresh(); });
+  $('reviewBtn').addEventListener('click', review);
+  $('editBtn').addEventListener('click', function () { show('reviewBox', false); });
+  $('confirmBtn').addEventListener('click', confirmSend);
+  $('addTokenBtn').addEventListener('click', addToken);
+  $('copyBtn').addEventListener('click', copyAddr);
+  $('maxLink').addEventListener('click', function (e) { e.preventDefault(); $('amtInput').value = toPlain(S.balance); });
+
+  (async function init() {
+    S.token = await resolveToken(); showToken();
+    var p = getProvider();
+    if (p) { try { S.eth = p; var a = await rpc('eth_accounts'); if (a && a.length) { S.account = a[0]; bindEvents(); await refresh(); } } catch (e) { /* stay on connect screen */ } }
+  })();
 })();
 </script>
 </body>
