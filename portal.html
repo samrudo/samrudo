@@ -65,9 +65,12 @@ details{font-size:13px;color:var(--muted)}summary{cursor:pointer;color:var(--tex
 
   <section class="card" id="walletCard" hidden>
     <h2>Your wallet</h2>
+    <div class="fine" style="margin:0 0 4px">Your wallet address</div>
     <div class="addr" id="acctText"></div>
+    <div class="fine" style="margin-top:6px"><a id="acctLink" target="_blank" rel="noopener" href="#">View your wallet on Polygonscan</a></div>
     <div class="bal"><span>SMRD</span><b id="balSmrd">–</b></div>
     <div class="bal"><span>POL (for gas)</span><b id="balPol">–</b></div>
+    <div class="fine" style="margin-top:10px">SMRD token contract: <span class="addr" id="tokShort"></span><br><a id="tokLink2" target="_blank" rel="noopener" href="#">View the SMRD token on Polygonscan</a></div>
     <div class="msg info" id="gasHint" hidden>You have no test POL, so you cannot send yet. <a href="https://faucet.polygon.technology/" target="_blank" rel="noopener">Get free test POL</a></div>
     <div class="row" style="margin-top:10px">
       <button class="secondary" id="refreshBtn" type="button">Refresh</button>
@@ -105,6 +108,7 @@ details{font-size:13px;color:var(--muted)}summary{cursor:pointer;color:var(--tex
 
   <section class="card" id="receiveCard" hidden>
     <h2>Receive $SMRD</h2>
+    <p class="fine" style="margin-top:0">Share this wallet address to receive SMRD. It is your own address, not the token contract address.</p>
     <div id="qrBox" aria-label="QR code of your wallet address"></div>
     <div class="addr" id="rcvAddr" style="text-align:center"></div>
     <button class="secondary" id="copyBtn" type="button" style="margin-top:10px">Copy address</button>
@@ -1401,7 +1405,7 @@ window.SamrudoQR={QRCode:__req('index'),QRErrorCorrectLevel:__req('QRErrorCorrec
 (function () {
   'use strict';
   var CFG = {
-    TOKEN: "",   // Optional: paste the $SMRD contract address here. If left empty, the portal reads it from index.html on this site.
+    TOKEN: "0x587Be7e9E3d07471A20bA54326592085250249c3",   // Optional: paste the $SMRD contract address here. If left empty, the portal reads it from index.html on this site.
     SYMBOL: "SMRD", DECIMALS: 18,
     CHAIN: { chainId: "0x13882", chainName: "Polygon Amoy Testnet", nativeCurrency: { name: "POL", symbol: "POL", decimals: 18 }, rpcUrls: ["https://rpc-amoy.polygon.technology"], blockExplorerUrls: ["https://amoy.polygonscan.com"] },
     EXPLORER: "https://amoy.polygonscan.com",
@@ -1524,6 +1528,8 @@ window.SamrudoQR={QRCode:__req('index'),QRErrorCorrectLevel:__req('QRErrorCorrec
       var chip = $('netChip');
       chip.textContent = onAmoy ? 'Polygon Amoy (test)' : 'Wrong network'; chip.className = 'chip ' + (onAmoy ? 'ok' : 'bad');
       $('acctText').textContent = S.account;
+      $('acctLink').href = CFG.EXPLORER + '/address/' + S.account;
+      if (S.token) { $('tokShort').textContent = S.token; $('tokLink2').href = CFG.EXPLORER + '/token/' + S.token; }
       show('walletCard', true);
       if (!onAmoy) { show('wrongNet', true); show('sendCard', false); show('receiveCard', false); show('activityCard', false); $('balSmrd').textContent = '–'; $('balPol').textContent = '–'; return; }
       show('wrongNet', false);
